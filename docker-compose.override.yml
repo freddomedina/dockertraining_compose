@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  dockertraining_compose_alfredo_medina:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"

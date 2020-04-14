@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  dockertraining_compose_alfredo_medina:
+    image: ${DOCKER_REGISTRY-}dockertrainingcomposealfredomedina
+    build:
+      context: .
+      dockerfile: dockertraining_compose_alfredo_medina/Dockerfile
+     ports:
+     - "8091:80"
+     environments:
+     - "ConnectionStrings:FoodDB":"Server=database_container;Port=3306;Database=fooddb; Uid=test; Pwd=123456"
+     links:
+     - mydb
+  mydb:
+     image:mysql
+     environments:
+        MYSQL_DATABASE: "FoodDB"
+        MYSQL_USER: "test"
+        MYSQL_PASSWORD : "123456"
+        MYSQL_ROOT_PASSWORD: "admin"
+     ports:
+        - "3018:3306"
+     volumes: 
+        - dockertraining_compose:"/var/lib/mysql"
+volumes:
+    dockertraining_compose:
+        
